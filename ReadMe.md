@@ -1,5 +1,5 @@
 # A Sticky Notes webpage
-> by [Ayaan Shaikh](https://github.com/ayaantuts);
+> by [Ayaan Shaikh](https://github.com/ayaantuts)
 ___
 ### Inspired by [Online Tutorials](https://www.youtube.com/@OnlineTutorialsYT), [video source](https://www.youtube.com/watch?v=Uk1cTgQVP9g)
 
