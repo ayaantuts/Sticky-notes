@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sticky Notes</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	<div class="notes">
+		<div class="create" style="--clr: #fff;">
+			<div class="plus">
+				<i class="fas fa-plus"></i>
+			</div>
+			<div class="inputGp">
+				<label for="heading">Title</label>
+				<input type="text" id="heading" class="inputBx" placeholder="Enter the title...">
+				<label for="content">Content</label>
+				<textarea id="content" class="inputBx" placeholder="Enter the content..."></textarea>
+				<button class="btn createBtn">Create</button>
+			</div>
+		</div>
+		<div class="note" style="--clr: #000;">
+			<div class="heading">
+				Welcome to this webpage
+			</div>
+			<div class="content">
+				Click on the plus icon on the left, to add a note<br>Fill in the text fields and click on the create
+				button
+			</div>
+			<div class="delete" onclick="this.parentNode.remove()">
+				<i class="fas fa-trash"></i>
+			</div>
+		</div>
+	</div>
+
+	<script src="./script.js"></script>
+</body>
+
+</html>

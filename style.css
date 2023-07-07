@@ -1,0 +1,265 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+	outline-color: transparent;
+	font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+	--size: 400px;
+}
+
+body {
+	min-height: 100vh;
+	background-color: #24252A;
+	padding: 2rem 2rem;
+}
+
+
+.notes {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 4rem;
+	flex-wrap: wrap;
+
+	.note,
+	.create {
+		width: var(--size);
+		height: var(--size);
+		display: flex;
+		align-items: center;
+		border-radius: 2rem;
+		overflow: hidden;
+	}
+
+	>.note {
+		position: relative;
+		background-color: var(--clr, #000);
+		color: #fff;
+		flex-direction: column;
+		padding: 40px 40px;
+		scale: 1;
+		filter: none;
+		transition: .2s ease-in-out;
+
+		>.heading {
+			font-size: 1.8em;
+			text-align: left;
+			margin-bottom: 20px;
+			position: relative;
+			white-space: nowrap;
+
+			&::before {
+				content: '';
+				position: absolute;
+				background-color: var(--clr, #fff);
+				filter: hue-rotate(180deg);
+				width: 50%;
+				height: 4px;
+				border-radius: 4px;
+				bottom: -4px;
+				left: 0;
+				transition: .4s ease-in-out .1s, filter 1s ease-in-out;
+			}
+		}
+
+		>.content {
+			font-size: 1.2em;
+			text-align: left;
+			color: #fff;
+		}
+
+		>.delete {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			padding: 10px 0;
+			text-align: center;
+			background-color: #f006;
+			translate: 0 100%;
+			transition: .1s ease-in-out;
+
+			&:hover {
+				background-color: #fff !important;
+
+				>i {
+					color: #000;
+				}
+			}
+
+			>i {
+				font-size: 1.3em;
+				cursor: pointer;
+
+				&:hover {
+					color: #f00;
+				}
+			}
+		}
+
+		&:hover {
+			background-color: #efefef;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.75);
+
+			>* {
+				color: var(--clr);
+			}
+
+			>.heading {
+				animation: marquee 5s linear backwards;
+			}
+
+			>.heading::before {
+				width: 100%;
+				filter: none;
+			}
+
+			>.delete {
+				translate: 0;
+				background-color: #f00;
+			}
+		}
+
+		&.hidden {
+			scale: 0;
+			transition: 0s;
+			filter: hue-rotate(30deg);
+		}
+	}
+}
+
+.create {
+	position: relative;
+	padding: 35px 40px;
+	cursor: pointer;
+
+	&:hover {
+		>.plus {
+			border-radius: 1rem;
+			background-color: #000;
+		}
+
+		>.plus i {
+			color: #fff;
+		}
+	}
+
+	>.plus {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: .4s ease-in-out;
+		border-radius: 2rem;
+		background-color: var(--clr, #fff);
+
+
+		>i {
+			color: #000;
+			font-size: 6em;
+			user-select: none;
+			transition: .4s ease-in-out;
+		}
+	}
+
+	>.inputGp {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		background-color: #24252A;
+		border-radius: 2rem;
+		box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.2),
+			-5px -5px 10px rgba(0, 0, 0, 0.75);
+
+		>label {
+			font-size: 1.3em;
+			color: #bbb;
+			padding: 5px 10px;
+			font-weight: 700;
+		}
+
+		>input {
+			margin: 10px 0 20px;
+		}
+
+		>textarea {
+			resize: none;
+			max-height: 120px;
+		}
+
+		>button {
+			padding: 10px 10px;
+			background-color: #fff;
+			color: #000;
+			cursor: pointer;
+			border: 0;
+			transition: .4s ease-in-out;
+			margin-top: 30px;
+			width: 60%;
+
+			&:hover {
+				background-color: #000;
+				color: #fff;
+			}
+		}
+	}
+
+	&.write {
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -15px -15px 40px rgba(0, 0, 0, 0.75);
+		>.plus {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		>.inputGp {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+
+@keyframes marquee {
+	0% {
+		transform: translateX(100%);
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+input,
+textarea,
+button {
+	width: 80%;
+	font-size: 1.1em;
+	outline: 0;
+	padding: 10px 15px;
+	background-color: #24252A;
+	border: 0;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	transition: .4s ease-in-out;
+}
+
+textarea {
+	border: 0;
+	box-shadow: 0 0 5px -3px rgba(255, 255, 255, 0.75);
+	border-radius: 10px;
+	min-height: 160px;
+}
+
+textarea:focus {
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	border-radius: 0;
+}
