@@ -108,11 +108,7 @@ body {
 			>* {
 				color: var(--clr);
 			}
-
-			>.heading {
-				animation: marquee 5s linear backwards;
-			}
-
+			
 			>.heading::before {
 				width: 100%;
 				filter: none;
@@ -224,17 +220,6 @@ body {
 			visibility: visible;
 			opacity: 1;
 		}
-	}
-}
-
-
-@keyframes marquee {
-	0% {
-		transform: translateX(100%);
-	}
-
-	100% {
-		transform: translateX(-100%);
 	}
 }
 

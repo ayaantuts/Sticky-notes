@@ -26,28 +26,24 @@ plus.addEventListener("click", () => {
 submit.addEventListener("click", () => {
 	let parent = submit.parentNode;
 	let note = {
+		id: new Date().getTime(),
 		heading: $("#heading", parent).value,
 		content: $("#content", parent).value,
 		color: colorgen()
 	}
 	addNote(note);
-
+	notesArr.push(note);
 	submit.parentNode.parentElement.classList.remove("write");
 	updateLocal();
 });
 
-function addNote({ heading, content, color }) {
+function addNote({ id, heading, content, color }) {
 	if (heading === '' || content === '')
 		return;
 
-	let noteEl = {
-		heading,
-		content,
-		color
-	}
-	notesArr.push(noteEl);
 	const note = document.createElement('div');
 	note.className = 'note hidden';
+	note.dataset.id = id;
 	const noteH = document.createElement('div');
 	noteH.className = 'heading';
 	noteH.innerText = heading.toString();
@@ -57,7 +53,15 @@ function addNote({ heading, content, color }) {
 	const del = document.createElement('div');
 	del.className = 'delete';
 	del.innerHTML = "<i class='fas fa-trash'></i>"
-	del.addEventListener('click', () => {del.parentElement.remove();notesArr = notesArr.filter(d => d.heading !== noteEl.heading); updateLocal()});
+	del.addEventListener('click', () => {
+		for (let i = 0; i < notesArr.length; i++) {
+			if (notesArr[i].id == del.parentElement.dataset.id) {
+				notesArr.splice(i, 1);
+			}
+		}
+		del.parentElement.remove();
+		updateLocal();
+	});
 	note.appendChild(noteH);
 	note.appendChild(noteC);
 	note.appendChild(del);
@@ -75,12 +79,11 @@ function updateLocal() {
 function loadLocal() {
 	if (localStorage.getItem("notes") == null)
 		return;
-	
-	notesArr = [];
+
 	notesArr = JSON.parse(localStorage.getItem("notes"));
 	notesArr.forEach(n => {
 		addNote(n);
 	});
 }
 
-loadLocal();
+window.addEventListener("load", loadLocal);
