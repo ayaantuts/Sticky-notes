@@ -3,6 +3,9 @@
 ___
 ### Inspired by [Online Tutorials](https://www.youtube.com/@OnlineTutorialsYT), [video source](https://www.youtube.com/watch?v=Uk1cTgQVP9g)
 
+## Preview
+Live preview can be found on [github page](https://ayaantuts.github.io/sticky-notes/)
+
 ## Features
 - Creating a new note
 - Delete existing note
@@ -15,3 +18,5 @@ ___
 - Add some of my social media links
 
 #### Once again, thanks to Online Tutorials YouTube channel
+
+Any PRs are welcome!
