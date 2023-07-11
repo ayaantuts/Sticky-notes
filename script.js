@@ -18,6 +18,9 @@ function $(text, scope = document) {
 const notes = $(".notes");
 const plus = $(".notes > .create > .plus");
 const submit = $(".inputGp .btn");
+const downBtn = $(".downloadBtn");
+const upBtn = $(".uploadBtn");
+const fileInput = $("input.file-upload[type=file]");
 
 plus.addEventListener("click", () => {
 	plus.parentElement.classList.add("write");
@@ -86,4 +89,67 @@ function loadLocal() {
 	});
 }
 
+downBtn.addEventListener("click", () => {
+	const todosToDownload = JSON.parse(localStorage.getItem("notes"));
+	let noteIndicator = {
+		notes: true,
+	}
+	todosToDownload.unshift(noteIndicator);
+	if (todosToDownload && todosToDownload.length === 0)
+		return;
+
+	const file = new Blob([JSON.stringify(todosToDownload)], { type: "application/json" });
+	const fileJSON = URL.createObjectURL(file);
+	const date = new Date();
+	const fileName = "Notes for " + date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + ".json";
+	saveAs(fileJSON, fileName);
+});
+
+upBtn.addEventListener("click", () => {
+	fileInput.click();
+});
+
+fileInput.addEventListener("change", () => {
+	let files = fileInput.files;
+	if (files.length === 0)
+		return;
+
+	let file = files[0];
+	if (file.type === "application/json") {
+		let fileReader = new FileReader();
+		fileReader.onload = () => {
+			let newNotes = JSON.parse(fileReader.result);
+			if (!newNotes[0]?.notes)
+				return;
+			let canAdd = true;
+			newNotes.shift();
+			newNotes.forEach(note => {
+				notesArr.forEach(n => {
+					if (n.id === note.id) {
+						canAdd = false;
+						return;
+					}
+				});
+				if (!canAdd)
+					return;
+				addNote(note);
+				notesArr.push(note);
+				updateLocal();
+			});
+		};
+		fileReader.readAsText(file);
+	}
+});
+
 window.addEventListener("load", loadLocal);
+
+
+function saveAs(url, filename) {
+	var a = document.createElement("a");
+	a.href = url;
+	a.download = filename;
+	a.style.display = "none";
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+}
