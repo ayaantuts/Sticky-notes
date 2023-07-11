@@ -114,7 +114,7 @@ fileInput.addEventListener("change", () => {
 	if (files.length === 0)
 		return;
 
-	let file = files[0];
+	let file = files[files.length - 1];
 	if (file.type === "application/json") {
 		let fileReader = new FileReader();
 		fileReader.onload = () => {
