@@ -248,3 +248,76 @@ textarea:focus {
 	border: 1px solid rgba(255, 255, 255, 0.6);
 	border-radius: 0;
 }
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	text-align: right;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 40px;
+	color: #fff;
+	.quick-cmd {
+		display: flex;
+		align-items: center;
+		padding: 0 40px;
+		font-size: 1.3em;
+		background-color: #fff1;
+		border-radius: 1rem;
+		>.file-upload {
+			display: none;
+		}
+		>i.fas {
+			padding: 1rem;
+			margin: 1rem;
+			background-color: #000;
+			border-radius: 1rem;
+			cursor: pointer;
+			transition: .4s ease-in-out;
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+	}
+}
+
+.tooltip {
+	position: relative;
+	&::after {
+		content: attr(data-tooltip);
+		position: absolute;
+		font-family: "Poppins", sans-serif;
+		font-size: .8em;
+		white-space: pre;
+		color: #fff;
+		background-color: #0004;
+		padding: 20px;
+		translate: 0 100%;
+		opacity: 0;
+		transition: .1s ease-in-out;
+		pointer-events: none;
+	}
+	&.t-up::after {
+		top: -100%;
+		left: 0%;
+		translate: calc(-50% + 1rem) 100%;
+	}
+	&.t-left::after {
+		top: 0;
+		left: -100%;
+		translate: -200%;
+	}
+	&.t-up:hover::after {
+		translate: calc(-50% + 1rem);
+	}
+	&.t-left:hover::after {
+		translate: -80%;
+	}
+	&:hover::after {
+		opacity: 1;
+		transition: .2s ease-in-out;
+	}
+}
